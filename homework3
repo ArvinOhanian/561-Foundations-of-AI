@@ -1,0 +1,35 @@
+def main():
+    # Opening file
+    file1 = open(r'C:\Users\arvin\Documents\Example.txt', 'r')
+    content = file1.readlines()
+
+    Algorithm_Type = content[0]
+    Grid_Size = Pos_Int(content[1])
+    Start = Pos_Int(content[2])
+    
+    End = Pos_Int(content[3])
+    
+   
+    
+    
+    file1.close()
+
+
+def Pos_Int(string):#Turns a string into an int list as long as the OG string has a number every other index ex. String = ["1 2 3"]
+    Position = []
+    count = 0
+    for number in string:
+        if(count%2 == 0):
+            Position.append(int(string[count]))
+        count+=1    
+    
+    return Position
+
+def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions and only one row
+    Loc3 = []
+    for i in range(0, len(Loc1)): 
+        Loc3.append(Loc1[i] + Loc2[i]) 
+    return Loc3   
+     
+if __name__ == '__main__':
+    main()
