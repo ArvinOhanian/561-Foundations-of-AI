@@ -1,35 +1,85 @@
+import collections
+
 def main():
     # Opening file
     file1 = open(r'C:\Users\arvin\Documents\Example.txt', 'r')
     content = file1.readlines()
 
     Algorithm_Type = content[0]
-    Grid_Size = Pos_Int(content[1])
-    Start = Pos_Int(content[2])
+    Grid_Size = To_Int(content[1])
+    Start = To_Int(content[2])
     
-    End = Pos_Int(content[3])
-    
-   
-    
+    End = To_Int(content[3])
     
     file1.close()
+    
+def bfs(graph, root):
+        
 
 
-def Pos_Int(string):#Turns a string into an int list as long as the OG string has a number every other index ex. String = ["1 2 3"]
+def To_Int(string):#Turns a string into an int list as long as the OG string has a number every other index ex. String = ["1 2 3"]
     Position = []
     count = 0
     for number in string:
         if(count%2 == 0):
             Position.append(int(string[count]))
-        count+=1    
+        count+=1
     
     return Position
 
 def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions and only one row
     Loc3 = []
-    for i in range(0, len(Loc1)): 
+    for i in range(0, len(Loc1)):
         Loc3.append(Loc1[i] + Loc2[i]) 
-    return Loc3   
+    return Loc3
+
+def To_dir(coded_dir)#takes an encoded direction 1-18 and converts it to a direction vector corresponding to ruleset
+    switch (coded_dir) {
+            case 1:  vector = [1, 0, 0];
+                     break;
+            case 2:  vector = [-1, 0, 0];
+                     break;
+            case 3:  vector = [0, 1, 0];
+                     break;
+            case 4:  vector = [0, -1, 0];
+                     break;
+            case 5:  vector = [0, 0, 1];
+                     break;
+            case 6:  vector = [0, 0, -1];
+                     break;
+            case 7:  vector = [1, 1, 0];
+                     break;
+            case 8:  vector = [1, -1, 0];
+                     break;
+            case 9:  vector = [-1, 1, 0];
+                     break;
+            case 10: vector = [-1, -1, 0];
+                     break;
+            case 11: vector = [1, 0, 1];
+                     break;
+            case 12: vector = [1, 0, -1];
+                     break;
+            case 13:  vector = [-1, 0, 1];
+                     break;
+            case 14:  vector = [-1, 0, -1];
+                     break;
+            case 15: vector = [0, 1, 1];
+                     break;
+            case 16: vector = [0, 1, -1];
+                     break;
+            case 17: vector = [0, -1, 1];
+                     break;
+            case 18: vector = [0, -1, -1];
+                     break;
+            default: vector = [99,99,99]
+                     print('fail')   
+                     break;
+        }
+    
+    return vector
+
+def graph(file)#takes file input.txt and returns a dictionary with all nodes and branches
+
      
 if __name__ == '__main__':
     main()
