@@ -9,21 +9,6 @@ def graph(content):#takes readlines of file input.txt and returns a dictionary w
     for node in range(nodes):
         content.index(node)
         
-def To_Int(string):#Turns a string into an int list as long as the OG string has a number every other index ex. String = ["1 2 3"]
-    Position = []
-    count = 0
-    for number in string:
-        if(count%2 == 0):
-            Position.append(int(string[count]))
-        count+=1
-    
-    return Position
-   
-
-def All_Nodes_to_Int(string_nodes):#takes a list of string nodes and converts to int
-    num_nodes = int(string_nodes[0])#takes first line read which indicates how many nodes there are
-    for node in range(num_nodes):
-        To_Int(string_nodes[node + 1])
           
 def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions and only one row
     Loc3 = []
@@ -33,19 +18,39 @@ def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions 
 
         
 file1 = open(r'C:\Users\arvin\Documents\Example.txt', 'r')
-content = file1.read().split("\n")
-#content_lines = file1.readlines()
-#only_nodes_string = content_lines[4:]
+content = file1.readlines()
 
-#only_nodes_int = only_nodes_string[4:].split("\n")
-#score_ints = [ int(x) for x in only_nodes.split() ]
-nodes = content[4:]
+nodes = content[5:]
 
-for i in nodes:
-    print(nodes[i])
-    #nodes_num = To_Int(nodes[node])
-    
-final = Move(nodes[2], [0,1,1, 1])
-#print(All_Nodes_to_Int(only_nodes))
-print(final)
-#print(only_nodes_int)
+example = ['1 2 3\n', '11 12 13\n', '123 45959556 789\n']
+int_pos = []
+int_pos_val = []
+idx = 0
+next_num = 0
+num_size = 0
+big_num = ''
+for val in example:
+    for char in val:
+        print(char)
+        print(char.isdigit())
+        print(val[idx-1])
+        if char.isdigit():
+            num_size+=1
+             
+        if char.isdigit() and val[idx+1].isdigit()==False:
+            print('if 2')
+            print(char)
+            for chars in range(num_size):
+                big_num =  big_num + val[idx-num_size+1]
+                num_size-=1
+            
+            int_pos_val.append(int(big_num))
+            big_num = ''
+        print('end loop')
+        idx+=1
+    int_pos.append(int_pos_val)
+    int_pos_val = []
+    idx = 0
+
+print(int_pos)
+
