@@ -4,30 +4,28 @@ def main():
     # Opening file
     file1 = open(r'C:\Users\arvin\Documents\Example.txt', 'r')
     content = file1.readlines()
-
-    Algorithm_Type = content[0]
-    Grid_Size = To_Int(content[1])
-    Start = To_Int(content[2])
     
-    End = To_Int(content[3])
-    graph(content)
+    Algorithm_Type = content[0]
+    
+    int_content = Textlines_to_int(content[1:])
+    Grid_Size = int_content[0]
+    Start = int_content[1]
+    End = int_content[2]
+    num_nodes = int_content[3]
+    all_nodes_and_vectors = int_content[4:]
+    
+    print(Grid_Size)
+    print(Start)
+    print(End)
+    print(num_nodes)
+    print(all_nodes_and_vectors)
+    
     file1.close()
     
     
     
 #def bfs(graph, root):
         
-
-
-def To_Int(string):#Turns a string into an int list as long as the OG string has a number every other index ex. String = ["1 2 3"]
-    Position = []
-    count = 0
-    for number in string:
-        if(count%2 == 0):
-            Position.append(int(string[count]))
-        count+=1
-    
-    return Position
 
 def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions and only one row
     Loc3 = []
@@ -76,6 +74,31 @@ def To_dir(coded_dir):#takes an encoded direction 1-18 and converts it to a dire
         vector = [99, 99, 99]
     
     return vector
+
+def Textlines_to_int(nodes):#takes a list of strings from input.txt and converts each line to int. returns int list of lists
+    int_pos = []
+    int_pos_val = []
+    idx = 0
+    next_num = 0
+    num_size = 0
+    big_num = ''
+    for val in nodes:
+        for char in val:
+            if char.isdigit():
+                num_size+=1
+                 
+            if char.isdigit() and val[idx+1].isdigit()==False:
+                for chars in range(num_size):
+                    big_num =  big_num + val[idx-num_size+1]
+                    num_size-=1
+                
+                int_pos_val.append(int(big_num))
+                big_num = ''
+            idx+=1
+        int_pos.append(int_pos_val)
+        int_pos_val = []
+        idx = 0
+    return int_pos
 
 def graph(content):#takes readlines of file input.txt and returns a dictionary with all nodes and branches
     final_dic = []
