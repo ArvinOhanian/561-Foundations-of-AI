@@ -100,6 +100,27 @@ def Textlines_to_int(nodes):#takes a list of strings from input.txt and converts
         idx = 0
     return int_pos
 
+def To_Dict(def_list):#takes an int list of lists and returns a dictionary with tuple keys reping points and values reping connected points
+    temp_list = []
+    final_dict = {}
+    directions = []
+    idx_count = 0
+    for list in def_list:
+        for val in list:
+            if list.index(val) < 3 and idx_count < 3:
+                temp_list.append(val)
+                idx_count+=1
+            
+            elif idx_count > 2:
+                directions.append(Move(To_dir(val), temp_list))
+                
+        temp_tup = tuple(temp_list)
+        final_dict[temp_tup] = directions
+        temp_list = []
+        directions = []
+        idx_count = 0
+    return final_dict
+
 def graph(content):#takes readlines of file input.txt and returns a dictionary with all nodes and branches
     final_dic = []
     nodes = To_Int(content[4])
