@@ -16,41 +16,116 @@ def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions 
         Loc3.append(Loc1[i] + Loc2[i]) 
     return Loc3
 
+def To_dir(coded_dir):#takes an encoded direction 1-18 and converts it to a direction vector corresponding to ruleset
+    if(coded_dir == 1):
+        vector = [1, 0, 0]
+    elif(coded_dir == 2):
+        vector = [-1, 0, 0]
+    elif(coded_dir == 3):
+        vector = [0, 1, 0]
+    elif(coded_dir == 4):
+        vector = [0, -1, 0]
+    elif(coded_dir == 5):
+        vector = [0, 0, 1]
+    elif(coded_dir == 6):
+        vector = [0, 0, -1]
+    elif(coded_dir == 7):
+        vector = [1, 1, 0]
+    elif(coded_dir == 8):
+        vector = [1, -1, 0]
+    elif(coded_dir == 9):
+        vector = [-1, 1, 0]
+    elif(coded_dir == 10):
+        vector = [-1, -1, 0]
+    elif(coded_dir == 11):
+        vector = [1, 0, 1]
+    elif(coded_dir == 12):
+        vector = [1, 0, -1]
+    elif(coded_dir == 13):
+        vector = [-1, 0, 1]
+    elif(coded_dir == 14):
+        vector = [-1, 0, -1]
+    elif(coded_dir == 15):
+        vector = [0, 1, 1]
+    elif(coded_dir == 16):
+        vector = [0, 1, -1]
+    elif(coded_dir == 17):
+        vector = [0, -1, 1]
+    elif(coded_dir == 18):
+        vector = [0, -1, -1]
+    else:
+        vector = [99, 99, 99]
+    
+    return vector
+
+def Textlines_to_int(nodes):#takes a list of strings from input.txt and converts each line to int. returns int list of lists
+    int_pos = []
+    int_pos_val = []
+    idx = 0
+    next_num = 0
+    num_size = 0
+    big_num = ''
+    for val in nodes:
+        for char in val:
+            if char.isdigit():
+                num_size+=1
+                 
+            if char.isdigit() and val[idx+1].isdigit()==False:
+                for chars in range(num_size):
+                    big_num =  big_num + val[idx-num_size+1]
+                    num_size-=1
+                
+                int_pos_val.append(int(big_num))
+                big_num = ''
+            idx+=1
+        int_pos.append(int_pos_val)
+        int_pos_val = []
+        idx = 0
+    return int_pos
         
 file1 = open(r'C:\Users\arvin\Documents\Example.txt', 'r')
 content = file1.readlines()
 
 nodes = content[5:]
-
-example = ['1 2 3\n', '11 12 13\n', '123 45959556 789\n']
-int_pos = []
-int_pos_val = []
-idx = 0
-next_num = 0
-num_size = 0
-big_num = ''
-for val in example:
-    for char in val:
-        print(char)
-        print(char.isdigit())
-        print(val[idx-1])
-        if char.isdigit():
-            num_size+=1
-             
-        if char.isdigit() and val[idx+1].isdigit()==False:
-            print('if 2')
-            print(char)
-            for chars in range(num_size):
-                big_num =  big_num + val[idx-num_size+1]
-                num_size-=1
+# [11, 12, 13, 14], [13, 4, 78, 10]
+def_list = [[1, 2, 3, 4]]
+temp_list = []
+final_dict = []
+directions = []
+num_dir = 0
+#def To_Dict(def_list):
+for list in def_list:
+    for val in list:
+        print(list.index(val))
+        if list.index(val) < 3:
+            print('loop 1')
+            temp_list.append(val)
+            print(temp_list)
+        
+        elif list.index(val) > 2:
+            print('loop 2')
+            #directions[0] = Move(To_dir(val), temp_list)
+            print(directions)
+            num_dir+=1
             
-            int_pos_val.append(int(big_num))
-            big_num = ''
-        print('end loop')
-        idx+=1
-    int_pos.append(int_pos_val)
-    int_pos_val = []
-    idx = 0
-
-print(int_pos)
-
+    temp_tup = tuple(temp_list)
+    final_dict[0] = temp_tup
+    final_dict[temp_tup] = directions
+    temp_list = []
+    directions = []
+    num_dir = 0
+    
+print(final_dict)
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
