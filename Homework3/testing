@@ -1,3 +1,5 @@
+import collections
+
 graph = {0: [1, 2], 1: [2], 2: [4], 3: [1, 2]}
 
 def graph(content):#takes readlines of file input.txt and returns a dictionary with all nodes and branches
@@ -112,9 +114,34 @@ def To_Dict(def_list):
         idx_count = 0
     return final_dict
 
-final_dict = To_Dict(def_list)
-    
-print(final_dict)
+final_dict = To_Dict(my_nodes)
+
+def bfs(final_dict, start, end):
+    i = 0
+    start = tuple(start)
+    visited, queue = [], collections.deque([start])
+    visited.append(start)
+
+    while queue:
+        print('queue before pop = ', queue)
+        # Dequeue a vertex from queue
+        vertex = queue.popleft()
+        print('vertex = ', vertex)
+        
+        # If not visited, mark it as visited, and
+        # enqueue it
+        
+        for neighbour in final_dict[visited[i]]:
+            print('neighbor= ', neighbour)
+            if tuple(neighbour) not in visited:
+                visited.append(tuple(neighbour))
+                queue.append(tuple(neighbour))
+                print('visited = ', visited)
+                print('queue = ', queue)
+                i+=1
+            
+bfs(final_dict, [0,0,0])
+#def bfs(final_dict, start)
     
         
         
