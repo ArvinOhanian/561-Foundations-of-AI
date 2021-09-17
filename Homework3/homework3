@@ -14,6 +14,7 @@ def main():
     num_nodes = int_content[3]
     all_nodes_and_vectors = int_content[4:]
     
+    print(Algorithm_Type)
     print(Grid_Size)
     print(Start)
     print(End)
@@ -24,7 +25,7 @@ def main():
     
     
     
-#def bfs(graph, root):
+#def bfs(final_dict, start)
         
 
 def Move(Loc1, Loc2):#adds two lists element wise. Lists must be same dimenions and only one row
@@ -121,12 +122,6 @@ def To_Dict(def_list):#takes an int list of lists and returns a dictionary with 
         idx_count = 0
     return final_dict
 
-def graph(content):#takes readlines of file input.txt and returns a dictionary with all nodes and branches
-    final_dic = []
-    nodes = To_Int(content[4])
-    for node in range(nodes):
-        content.index(node)
-    
      
 if __name__ == '__main__':
     main()
